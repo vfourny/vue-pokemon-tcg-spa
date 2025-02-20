@@ -1,19 +1,35 @@
 <template>
-  <n-card :title="pokemonCard.name" size="small">
+  <n-card class="pokemon-card" size="small">
     <template #header>
-      #header
+      <div class="card-header">
+        <span class="pokemon-name">{{ pokemonCard.name }}</span>
+        <span class="pokemon-hp">PV {{ pokemonCard.lifePoints }}</span>
+      </div>
     </template>
+
     <template #header-extra>
-      PV {{ pokemonCard.lifePoints }}
-      <n-tag :bordered="true" :color="{color:getPokemonTypeColor(pokemonCard.type.name), textColor:'black'}" round>
-        {{ pokemonCard.type.name }}
-      </n-tag>
+      <div class="type-container">
+        <n-tag :bordered="true" :color="{color: getPokemonTypeColor(pokemonCard.type.name), textColor: 'black'}" round>
+          {{ pokemonCard.type.name }}
+        </n-tag>
+      </div>
     </template>
+
     <template #cover>
-      <img :src="pokemonCard.imageUrl">
+      <img :src="pokemonCard.imageUrl" class="pokemon-image">
     </template>
+
     <template #default>
-      <p>ttest</p>
+      <div class="pokemon-info">
+        <p class="pokemon-size">Taille: {{ pokemonCard.height }}m | Poids: {{ pokemonCard.weight }}kg</p>
+      </div>
+
+      <div class="pokemon-attacks">
+        <div class="attack">
+          <span class="attack-name">{{ pokemonCard.attack.name }}</span>
+          <span class="attack-damage">{{ pokemonCard.attack.damages }} PV</span>
+        </div>
+      </div>
     </template>
   </n-card>
 </template>
@@ -21,51 +37,79 @@
 <script lang="ts" setup>
 import type {IPokemonCard} from "../types/pokemon.types.ts";
 
-const props = defineProps<{
-  pokemonCard: IPokemonCard
-}>();
-
-const {pokemonCard} = props
+const props = defineProps<{ pokemonCard: IPokemonCard }>();
+const {pokemonCard} = props;
 
 const getPokemonTypeColor = (type: string) => {
-  switch (type.toUpperCase()) {
-    case 'FIRE':
-      return '#FF9C54';
-    case 'WATER':
-      return '#4A90E2';
-    case 'GRASS':
-      return '#8BC34A';
-    case 'ELECTRIC':
-      return '#FFD54F';
-    case 'PSYCHIC':
-      return '#FF80AB';
-    case 'FIGHTING':
-      return '#FF5252';
-    case 'DARK':
-      return '#424242';
-    case 'STEEL':
-      return '#B0BEC5';
-    case 'FAIRY':
-      return '#FF4081';
-    case 'DRAGON':
-      return '#7E57C2';
-    case 'GHOST':
-      return '#7986CB';
-    case 'ICE':
-      return '#4DD0E1';
-    case 'BUG':
-      return '#CDDC39';
-    case 'POISON':
-      return '#9C27B0';
-    case 'ROCK':
-      return '#A1887F';
-    case 'GROUND':
-      return '#795548';
-    case 'FLYING':
-      return '#90A4AE';
-    default:
-      return '#9E9E9E';
-  }
+  const colors: Record<string, string> = {
+    FIRE: '#FF9C54', WATER: '#4A90E2', GRASS: '#8BC34A', ELECTRIC: '#FFD54F',
+    PSYCHIC: '#FF80AB', FIGHTING: '#FF5252', DARK: '#424242', STEEL: '#B0BEC5',
+    FAIRY: '#FF4081', DRAGON: '#7E57C2', GHOST: '#7986CB', ICE: '#4DD0E1',
+    BUG: '#CDDC39', POISON: '#9C27B0', ROCK: '#A1887F', GROUND: '#795548',
+    FLYING: '#90A4AE'
+  };
+  return colors[type.toUpperCase()] || '#9E9E9E';
 };
 </script>
 
+<style scoped>
+.pokemon-card {
+  width: 250px;
+  height: 350px;
+  border-radius: 10px;
+  background: #f8f8f8;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pokemon-hp {
+  color: red;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.type-container {
+  margin-top: 5px;
+}
+
+.pokemon-image {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.pokemon-info {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+}
+
+.pokemon-attacks {
+  margin-top: 5px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.attack {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+}
+
+.attack-name {
+  font-weight: bold;
+}
+
+.attack-damage {
+  color: red;
+}
+</style>

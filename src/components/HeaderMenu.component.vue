@@ -11,17 +11,17 @@ const router = useRouter();
 const isLoggedIn = ref(false);
 const menuOptions = ref([
   {
-    label: 'Collections',
-    key: 'collections',
-    onClick: () => {
-      router.push({name: 'collections'});
-    }
-  },
-  {
     label: 'DeckBuilder',
     key: 'deckBuilder',
     onClick: () => {
       router.push({name: 'deckBuilder'});
+    }
+  },
+  {
+    label: 'Mes Decks',
+    key: 'deck-collections',
+    onClick: () => {
+      router.push({name: 'deck-collections'});
     }
   },
   {

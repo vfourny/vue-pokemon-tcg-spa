@@ -6,7 +6,7 @@ export interface IPokemonType {
 export interface IAttack {
     id: string;
     name: string;
-    damage: number;
+    damages: number;
     type: IPokemonType
 }
 
@@ -19,4 +19,6 @@ export interface IPokemonCard {
     weakness: IPokemonType;
     pokedexId: number;
     attack: IAttack
+    height: number;
+    weight: number;
 }
