@@ -1,26 +1,19 @@
-<script setup lang="ts">
-import { NConfigProvider } from 'naive-ui';
-import HelloWorld from './components/HelloWorld.vue';
-import { darkTheme } from 'naive-ui';
+<script lang="ts" setup>
+import {NConfigProvider} from 'naive-ui';
+import HeaderMenu from './components/HeaderMenu.component.vue';
 </script>
 
 <template>
-  <n-config-provider :theme="darkTheme">
-    <HelloWorld msg="Vite + Vue"
-  /></n-config-provider>
+  <n-config-provider>
+    <n-layout>
+      <n-layout-header>
+        <HeaderMenu/>
+      </n-layout-header>
+      <n-layout-content>
+        <div style="width: 66.6667%; margin: 0 auto; height: 100vh;">
+          <RouterView/>
+        </div>
+      </n-layout-content>
+    </n-layout>
+  </n-config-provider>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
