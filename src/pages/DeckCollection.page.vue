@@ -1,5 +1,5 @@
 <template>
-  <div class="deck-list">
+  <div>
     <h2>Mes Decks</h2>
 
     <n-list bordered>
@@ -17,13 +17,11 @@
       </template>
 
       <div v-if="selectedDeck">
-        <div class="deck-preview">
-          <PokemonCard
-              v-for="pokemonCard in selectedDeck.cards"
-              :key="pokemonCard.id"
-              :pokemonCard="pokemonCard"
-          />
-        </div>
+        <PokemonCard
+            v-for="pokemonCard in selectedDeck.cards"
+            :key="pokemonCard.id"
+            :pokemonCard="pokemonCard"
+        />
       </div>
     </n-modal>
   </div>
@@ -34,6 +32,7 @@ import {ref} from 'vue';
 import {useDeckStore} from '../stores/deck.store';
 import {storeToRefs} from 'pinia';
 import PokemonCard from '../components/PokemonCard.component.vue';
+import type {IDeck} from "../types/deck.type.ts";
 
 const deckStore = useDeckStore();
 const {decks} = storeToRefs(deckStore);
@@ -51,18 +50,3 @@ const closeModal = () => {
   selectedDeck.value = null;
 };
 </script>
-
-<style scoped>
-.deck-list {
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-}
-
-.deck-preview {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-</style>

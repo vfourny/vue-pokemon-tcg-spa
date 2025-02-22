@@ -1,4 +1,4 @@
-import {createMemoryHistory, createRouter} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import DeckCollectionPage from './pages/DeckCollection.page.vue'
 import LoginFormPage from './pages/LoginForm.page.vue'
 import DeckBuilder from './pages/DeckBuilder.page.vue'
@@ -12,6 +12,6 @@ const routes = [
 ]
 
 export const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHistory(),
     routes,
 })

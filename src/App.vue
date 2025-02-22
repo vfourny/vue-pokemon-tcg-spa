@@ -10,9 +10,7 @@ import HeaderMenu from './components/HeaderMenu.component.vue';
         <HeaderMenu/>
       </n-layout-header>
       <n-layout-content>
-        <div style="width: 66.6667%; margin: 0 auto; height: 100vh;">
-          <RouterView/>
-        </div>
+        <RouterView/>
       </n-layout-content>
     </n-layout>
   </n-config-provider>

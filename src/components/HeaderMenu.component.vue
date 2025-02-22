@@ -27,7 +27,6 @@ const menuOptions = ref([
   {
     label: isLoggedIn.value ? 'Déconnexion' : 'Connexion',
     key: 'auth',
-    onClick: () => handleAuthClick()
   }
 ]);
 

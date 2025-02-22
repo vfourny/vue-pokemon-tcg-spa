@@ -1,27 +1,23 @@
 <template>
-  <div v-if="currentBuildingDeck" class="deck-preview">
+  <div v-if="currentBuildingDeck">
     <h3>Deck ({{ currentBuildingDeck.cards.length }} cartes)</h3>
-    <n-input v-model:value="currentBuildingDeck.name" class="deck-name-input" placeholder="Nom du deck..."/>
-    <div class="deck-cards">
-      <n-grid :cols="6" :x-gap="12" :y-gap="12">
-        <n-gi v-for="pokemonCard in currentBuildingDeck.cards" :key="pokemonCard.id">
-          <PokemonCard :pokemonCard="pokemonCard"
-                       @click="removeFromDeck(pokemonCard)"/>
-        </n-gi>
-      </n-grid>
-    </div>
+    <n-input v-model:value="currentBuildingDeck.name" placeholder="Nom du deck..."/>
+    <n-grid :cols="6" :x-gap="12" :y-gap="12">
+      <n-gi v-for="pokemonCard in currentBuildingDeck.cards" :key="pokemonCard.id">
+        <PokemonCard :pokemonCard="pokemonCard"
+                     @click="removeFromDeck(pokemonCard)"/>
+      </n-gi>
+    </n-grid>
     <n-button type="primary" @click="saveDeck">Sauvegarder</n-button>
   </div>
 
-  <div class="cards-container">
-    <n-input v-model:value="searchQuery" clearable placeholder="Rechercher une carte..."/>
+  <n-input v-model:value="searchQuery" clearable placeholder="Rechercher une carte..."/>
 
-    <n-grid :cols="6" :x-gap="12" :y-gap="12">
-      <n-gi v-for="pokemonCard in filteredPokemonCards" :key="pokemonCard.id">
-        <PokemonCard :pokemonCard="pokemonCard" @click="addToDeck(pokemonCard)"/>
-      </n-gi>
-    </n-grid>
-  </div>
+  <n-grid :cols="6" :x-gap="12" :y-gap="12">
+    <n-gi v-for="pokemonCard in filteredPokemonCards" :key="pokemonCard.id">
+      <PokemonCard :pokemonCard="pokemonCard" @click="addToDeck(pokemonCard)"/>
+    </n-gi>
+  </n-grid>
 </template>
 
 <script lang="ts" setup>
@@ -70,38 +66,3 @@ onMounted(async () => {
   };
 });
 </script>
-
-<style scoped>
-.deck-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.n-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: 1fr;
-  gap: 12px;
-}
-
-.n-gi {
-  display: flex;
-  justify-content: center;
-}
-
-.deck-preview {
-  margin-top: 20px;
-}
-
-.deck-name-input {
-  margin-bottom: 12px;
-}
-</style>

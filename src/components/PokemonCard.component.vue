@@ -54,8 +54,8 @@ const getPokemonTypeColor = (type: string) => {
 
 <style scoped>
 .pokemon-card {
-  width: 250px;
-  height: 350px;
+  width: auto;
+  height: auto;
   border-radius: 10px;
   background: #f8f8f8;
   padding: 10px;
