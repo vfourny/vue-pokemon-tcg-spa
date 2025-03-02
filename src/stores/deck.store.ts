@@ -1,25 +1,22 @@
 import {defineStore} from 'pinia';
 import {ref} from 'vue';
-import type {IDeck} from "../types/deck.type.ts";
+import type {IDeck, IDeckPayload} from "../types/deck.type.ts";
 import {getDecks, postDeck} from "../api/deck.api.ts";
 
 export const useDeckStore = defineStore('deckStore', () => {
-
-    const currentBuildingDeck = ref<IDeck | null>(null);
     const decks = ref<IDeck[]>([]);
 
-    const fetchMyDecks = async () => {
+    const fetchDecks = async () => {
         return await getDecks()
     }
 
-    const createDeck = async (deckPayload: IDeck) => {
+    const createDeck = async (deckPayload: IDeckPayload) => {
         await postDeck(deckPayload);
     }
 
     return {
         decks,
-        currentBuildingDeck,
-        fetchMyDecks,
+        fetchDecks,
         createDeck
     }
 });

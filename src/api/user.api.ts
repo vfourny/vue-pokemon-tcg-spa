@@ -5,9 +5,9 @@ const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const postUser = async () => {
+export const postUser = async (user: UserPayload) => {
     try {
-        const response = await api.post(`/users`);
+        const response = await api.post(`/users`, user);
         return response.data
     } catch (error) {
         console.error(error);

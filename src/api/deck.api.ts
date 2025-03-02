@@ -15,8 +15,14 @@ export const getDecks = async () => {
 }
 
 export const postDeck = async (deckPayload: IDeck) => {
+    const token = localStorage.getItem('token');
     try {
-        const response = await api.post(`/decks`, deckPayload);
+        const response = await api.post(`/decks`, deckPayload,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
         return response.data
     } catch (error) {
         console.error(error);

@@ -1,15 +1,3 @@
-<script setup>
-import {ref} from 'vue';
-import LoginComponent from '../components/Register.component.vue';
-import RegisterComponent from '../components/SignIn.component.vue';
-
-const activeTab = ref('login');
-
-const switchTab = (tab) => {
-  activeTab.value = tab;
-};
-</script>
-
 <template>
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <n-card class="w-96 shadow-lg">
@@ -20,7 +8,7 @@ const switchTab = (tab) => {
           type="line"
       >
         <n-tab-pane name="login" tab="Connexion">
-          <LoginComponent @switch-to-register="switchTab('register')"/>
+          <SignInComponent @switch-to-register="switchTab('register')"/>
         </n-tab-pane>
         <n-tab-pane name="register" tab="Inscription">
           <RegisterComponent @switch-to-login="switchTab('login')"/>
@@ -29,3 +17,16 @@ const switchTab = (tab) => {
     </n-card>
   </div>
 </template>
+
+<script setup>
+import RegisterComponent from '../components/Register.component.vue';
+import SignInComponent from '../components/SignIn.component.vue';
+
+import {ref} from 'vue';
+
+const activeTab = ref('login');
+
+const switchTab = (tab) => {
+  activeTab.value = tab;
+};
+</script>

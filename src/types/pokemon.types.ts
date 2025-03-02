@@ -4,14 +4,14 @@ export interface IPokemonType {
 }
 
 export interface IAttack {
-    id: string;
+    id: number;
     name: string;
     damages: number;
     type: IPokemonType
 }
 
 export interface IPokemonCard {
-    id: string;
+    id: number;
     name: string;
     type: IPokemonType;
     imageUrl: string;

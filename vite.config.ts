@@ -12,6 +12,11 @@ export default defineConfig({
                 'vue',
                 {
                     'naive-ui': [
+                        'NMessageProvider',
+                        'NTabs',
+                        'NTabPane',
+                        'NSpace',
+                        'NFlex',
                         'NSpin',
                         'NLayout',
                         'NLayoutHeader',

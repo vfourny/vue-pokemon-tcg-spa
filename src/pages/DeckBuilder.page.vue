@@ -1,23 +1,29 @@
 <template>
-  <div v-if="currentBuildingDeck">
-    <h3>Deck ({{ currentBuildingDeck.cards.length }} cartes)</h3>
-    <n-input v-model:value="currentBuildingDeck.name" placeholder="Nom du deck..."/>
+  <div v-if="chosenCards">
+    <h3>Deck ({{ chosenCards.length }} cartes)</h3>
+
+    <!-- Nom du deck et bouton côte à côte -->
+    <div class="deck-header">
+      <n-input v-model:value="deckName" class="deck-name-input" placeholder="Nom du deck..."/>
+      <n-button type="primary" @click="saveDeck">Sauvegarder</n-button>
+    </div>
+
     <n-grid :cols="6" :x-gap="12" :y-gap="12">
-      <n-gi v-for="pokemonCard in currentBuildingDeck.cards" :key="pokemonCard.id">
+      <n-gi v-for="pokemonCard in chosenCards" :key="pokemonCard.id">
         <PokemonCard :pokemonCard="pokemonCard"
                      @click="removeFromDeck(pokemonCard)"/>
       </n-gi>
     </n-grid>
-    <n-button type="primary" @click="saveDeck">Sauvegarder</n-button>
   </div>
 
-  <n-input v-model:value="searchQuery" clearable placeholder="Rechercher une carte..."/>
+  <!-- Séparateur entre le deck et la collection -->
+  <div class="deck-collection-separator"></div>
 
-  <div v-if="isLoading" class="loading-container">
-    <n-spin/>
-  </div>
+  <n-flex justify="center" style="width: 50%; margin: 30px auto;">
+    <n-input v-model:value="searchQuery" clearable placeholder="Rechercher une carte..."/>
+  </n-flex>
 
-  <n-grid v-else :cols="6" :x-gap="12" :y-gap="12">
+  <n-grid :cols="6" :x-gap="12" :y-gap="12">
     <n-gi v-for="pokemonCard in filteredPokemonCards" :key="pokemonCard.id">
       <PokemonCard :pokemonCard="pokemonCard" @click="addToDeck(pokemonCard)"/>
     </n-gi>
@@ -35,10 +41,12 @@ import PokemonCard from '../components/PokemonCard.component.vue';
 const deckStore = useDeckStore();
 const pokemonCardStore = usePokemonCardStore();
 
-const {currentBuildingDeck} = storeToRefs(deckStore);
 const {pokemonCards} = storeToRefs(pokemonCardStore);
 
 const searchQuery = ref('');
+
+const deckName = ref('');
+const chosenCards = ref<IPokemonCard[]>([]);
 
 const filteredPokemonCards = computed(() => {
   return pokemonCards.value.filter(card =>
@@ -47,26 +55,54 @@ const filteredPokemonCards = computed(() => {
 });
 
 const addToDeck = (card: IPokemonCard) => {
-  currentBuildingDeck.value?.cards.push(card);
+  chosenCards.value?.push(card);
 };
 const removeFromDeck = (card: IPokemonCard) => {
-  if (!currentBuildingDeck.value) return;
-  currentBuildingDeck.value.cards = currentBuildingDeck.value?.cards.filter(c => c.id !== card.id);
+  if (!chosenCards.value) return;
+  chosenCards.value = chosenCards.value?.filter(currentCard => currentCard.id !== card.id);
 };
 
 const saveDeck = () => {
-  if (!currentBuildingDeck.value || !currentBuildingDeck.value.name.trim()) {
+  if (!deckName.value || !deckName.value.trim()) {
     alert('Veuillez entrer un nom pour le deck avant de le sauvegarder.');
     return;
   }
-  deckStore.saveDeck(currentBuildingDeck.value);
+  if (chosenCards.value.length === 0) {
+    alert('Un deck doit contenir au moins 1 cartes.');
+    return;
+  }
+  deckStore.createDeck(
+      {
+        name: deckName.value,
+        cards: chosenCards.value.map(card => card.id)
+      }
+  );
 };
 
 onMounted(async () => {
   await pokemonCardStore.fetchPokemonCards();
-  currentBuildingDeck.value = {
-    name: '',
-    cards: []
-  };
 });
 </script>
+
+<style scoped>
+/* Style pour aligner le nom du deck et le bouton côte à côte */
+.deck-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+/* Taille normale pour l'input du nom du deck */
+.deck-name-input {
+  width: 300px;
+}
+
+/* Séparateur entre le deck et la collection */
+.deck-collection-separator {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 30px 0;
+  width: 100%;
+}
+</style>
