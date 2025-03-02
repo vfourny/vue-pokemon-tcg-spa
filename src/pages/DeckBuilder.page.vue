@@ -13,7 +13,11 @@
 
   <n-input v-model:value="searchQuery" clearable placeholder="Rechercher une carte..."/>
 
-  <n-grid :cols="6" :x-gap="12" :y-gap="12">
+  <div v-if="isLoading" class="loading-container">
+    <n-spin/>
+  </div>
+
+  <n-grid v-else :cols="6" :x-gap="12" :y-gap="12">
     <n-gi v-for="pokemonCard in filteredPokemonCards" :key="pokemonCard.id">
       <PokemonCard :pokemonCard="pokemonCard" @click="addToDeck(pokemonCard)"/>
     </n-gi>

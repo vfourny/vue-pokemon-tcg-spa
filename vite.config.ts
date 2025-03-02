@@ -12,6 +12,7 @@ export default defineConfig({
                 'vue',
                 {
                     'naive-ui': [
+                        'NSpin',
                         'NLayout',
                         'NLayoutHeader',
                         'NLayoutSider',

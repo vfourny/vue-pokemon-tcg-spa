@@ -16,7 +16,7 @@
     </template>
 
     <template #cover>
-      <img :src="pokemonCard.imageUrl" class="pokemon-image">
+      <img :src="pokemonCard.imageUrl" alt="pokemon-image" class="pokemon-image">
     </template>
 
     <template #default>

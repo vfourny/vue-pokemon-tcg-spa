@@ -1,44 +1,31 @@
 <script setup>
 import {ref} from 'vue';
-import {useRouter} from 'vue-router';
-import {useUserStore} from "../stores/user.store.ts";
+import LoginComponent from '../components/Register.component.vue';
+import RegisterComponent from '../components/SignIn.component.vue';
 
-const router = useRouter();
-const userStore = useUserStore();
+const activeTab = ref('login');
 
-const email = ref('');
-const password = ref('');
-const loading = ref(false);
-
-const handleLogin = async () => {
-  loading.value = true;
-  try {
-    await userStore.login(email.value, password.value);
-    await router.push('/collection');
-  } catch (error) {
-    console.error('Identifiants incorrects');
-  } finally {
-    loading.value = false;
-  }
+const switchTab = (tab) => {
+  activeTab.value = tab;
 };
 </script>
 
 <template>
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <n-card class="shadow-lg" title="Connexion">
-      <n-form @submit.prevent="handleLogin">
-        <n-form-item label="Email">
-          <n-input v-model="email" placeholder="Entrez votre email"/>
-        </n-form-item>
-        <n-form-item label="Mot de passe">
-          <n-input v-model="password" placeholder="Entrez votre mot de passe" type="password"/>
-        </n-form-item>
-        <n-space vertical>
-          <n-button :loading="loading" block type="primary" @click="handleLogin">
-            Se connecter
-          </n-button>
-        </n-space>
-      </n-form>
+    <n-card class="w-96 shadow-lg">
+      <n-tabs
+          v-model:value="activeTab"
+          :tabs-padding="20"
+          animated
+          type="line"
+      >
+        <n-tab-pane name="login" tab="Connexion">
+          <LoginComponent @switch-to-register="switchTab('register')"/>
+        </n-tab-pane>
+        <n-tab-pane name="register" tab="Inscription">
+          <RegisterComponent @switch-to-login="switchTab('login')"/>
+        </n-tab-pane>
+      </n-tabs>
     </n-card>
   </div>
 </template>

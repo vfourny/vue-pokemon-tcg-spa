@@ -14,7 +14,7 @@ export const getDecks = async () => {
     }
 }
 
-export const createDeck = async (deckPayload: IDeck) => {
+export const postDeck = async (deckPayload: IDeck) => {
     try {
         const response = await api.post(`/decks`, deckPayload);
         return response.data

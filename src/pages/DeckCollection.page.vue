@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {useDeckStore} from '../stores/deck.store';
 import {storeToRefs} from 'pinia';
 import PokemonCard from '../components/PokemonCard.component.vue';
@@ -49,4 +49,8 @@ const closeModal = () => {
   showModal.value = false;
   selectedDeck.value = null;
 };
+
+onMounted(() => {
+  deckStore.fetchMyDecks();
+})
 </script>

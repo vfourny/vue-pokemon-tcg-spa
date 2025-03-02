@@ -4,7 +4,6 @@ import type {UserPayload} from "../types/user.type.ts";
 
 export const useUserStore = defineStore('userStore', () => {
 
-
     const createUser = async (userPayload: UserPayload) => {
         await postUser();
     }

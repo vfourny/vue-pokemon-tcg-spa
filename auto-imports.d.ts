@@ -25,6 +25,8 @@ declare global {
   const NOption: typeof import('naive-ui')['NOption']
   const NSelect: typeof import('naive-ui')['NSelect']
   const NSpace: typeof import('naive-ui')['NSpace']
+  const NSpin: typeof import('naive-ui')['NSpin']
+  const NSpinner: typeof import('naive-ui')['NSpinner']
   const NTag: typeof import('naive-ui')['NTag']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']

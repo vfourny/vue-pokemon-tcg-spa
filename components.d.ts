@@ -27,9 +27,15 @@ declare module 'vue' {
     NMenu: typeof import('naive-ui')['NMenu']
     NModal: typeof import('naive-ui')['NModal']
     NSpace: typeof import('naive-ui')['NSpace']
+    NSpin: typeof import('naive-ui')['NSpin']
+    NSpinner: typeof import('naive-ui')['NSpinner']
+    NTabPane: typeof import('naive-ui')['NTabPane']
+    NTabs: typeof import('naive-ui')['NTabs']
     NTag: typeof import('naive-ui')['NTag']
     'PokemonCard.component': typeof import('./src/components/PokemonCard.component.vue')['default']
+    'Register.component': typeof import('./src/components/Register.component.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    'SignIn.component': typeof import('./src/components/SignIn.component.vue')['default']
   }
 }

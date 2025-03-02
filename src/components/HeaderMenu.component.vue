@@ -1,5 +1,5 @@
 <template>
-  <n-menu :options="menuOptions" mode="horizontal" @update:value="handleMenuSelect"/>
+  <n-menu :options="menuOptions" mode="horizontal"/>
 </template>
 
 <script lang="ts" setup>
@@ -8,26 +8,27 @@ import {useRouter} from 'vue-router'
 
 const router = useRouter();
 
-const isLoggedIn = ref(false);
 const menuOptions = ref([
   {
     label: 'DeckBuilder',
-    key: 'deckBuilder',
+    key: 'deck-builder',
     onClick: () => {
-      router.push({name: 'deckBuilder'});
+      router.push('/deck-builder');
     }
   },
   {
     label: 'Mes Decks',
-    key: 'deck-collections',
+    key: 'deck-collection',
     onClick: () => {
-      router.push({name: 'deck-collections'});
+      router.push('/deck-collection');
     }
   },
   {
-    label: isLoggedIn.value ? 'Déconnexion' : 'Connexion',
-    key: 'auth',
-  }
+    label: 'Login',
+    key: 'login',
+    onClick: () => {
+      router.push('/login');
+    }
+  },
 ]);
-
 </script>
