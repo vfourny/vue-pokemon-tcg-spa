@@ -78,7 +78,7 @@ viendra s'ajouter à mon deck. Une fois satisfait, je donne un nom à mon deck e
 
 ## DeckCollection
 
-![img.png](public/images/deck-table.png)
+![img.png](public/images/deck-table.png)np
 
 ![img.png](public/images/delete-deck.png)
 
