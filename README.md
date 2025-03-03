@@ -18,6 +18,12 @@ Le but de ce projet est de créer une application web permettant de gérer des d
 > La grille est notée sur 14 points. La section bonus vous propose différentes méthodes pour augmenter votre score. Voir
 > la section [Bonus](#bonus).
 
+## Initialisation
+
+1. Cloner le projet avec git clone
+2. Installer les dépendances en vous basant sur le package-lock.json avec `npm ci`.
+   3Lancer le serveur avec la commande `npm run dev`.
+
 ## Introduction
 
 #### Prérequis
@@ -47,9 +53,21 @@ Le fichier `package.json` contient plusieurs `scripts` qui vous seront utiles:
 - `npm run type-check` : permet de vérifier les types.
 - `npm run start` : permet de lancer le serveur en mode production.
 
+#### Dossier `src`
+
+Le dossier `src` contient plusieurs dossiers et fichiers qui vous seront utiles:
+
+- `components` : contient les composants de l'application
+- `pages` : contient les pages de l'application
+- `router.ts` : contient le fichier de configuration du router
+- `store` : contient le store de l'application
+- `types` : contient les types de l'application
+
+Une base de code est déjà présente dans le projet. Vous pouvez la modifier à votre guise.
+
 ## Page Login
 
-En premier lieu vous allez créer une page de login. Elle contiendra deux formulaires, un pour la connexion et un pour
+En premier lieu, vous allez créer une page de login. Elle contiendra deux formulaires, un pour la connexion et un pour
 l'inscription.
 
 - Lors de la création du compte, l'utilisateur est redirigé vers le formulaire de connexion
