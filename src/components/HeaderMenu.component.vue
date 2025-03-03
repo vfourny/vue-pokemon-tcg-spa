@@ -3,12 +3,17 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue'
+import {computed} from 'vue'
 import {useRouter} from 'vue-router'
+import {useUserStore} from "../stores/user.store.ts";
+import {storeToRefs} from "pinia";
 
 const router = useRouter();
+const userStore = useUserStore()
 
-const menuOptions = ref([
+const {currentUser} = storeToRefs(userStore)
+
+const menuOptions = computed(() => [
   {
     label: 'DeckBuilder',
     key: 'deck-builder',
@@ -23,12 +28,21 @@ const menuOptions = ref([
       router.push('/deck-collection');
     }
   },
-  {
-    label: 'Login',
-    key: 'login',
-    onClick: () => {
-      router.push('/login');
-    }
-  },
+  currentUser.value
+      ? {
+        label: 'Déconnexion',
+        key: 'logout',
+        onClick: () => {
+          userStore.logout();
+          router.push('/login');
+        }
+      }
+      : {
+        label: 'Login',
+        key: 'login',
+        onClick: () => {
+          router.push('/login');
+        }
+      }
 ]);
 </script>

@@ -8,6 +8,7 @@ const routes = [
     {path: '/', component: LoginFormPage},
     {path: '/deck-builder', component: DeckBuilder},
     {path: '/deck-collection', component: DeckCollectionPage},
+    {path: '/login', component: LoginFormPage},
 ]
 
 export const router = createRouter({

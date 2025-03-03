@@ -22,10 +22,17 @@ export const useUserStore = defineStore('userStore', () => {
         currentUser.value = {id: data.id, email: data.email};
     }
 
+    const logout = () => {
+        currentUser.value = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+    }
+
     return {
         currentUser,
         createUser,
         login,
-        fetchCurrentUser
+        fetchCurrentUser,
+        logout
     }
 });
