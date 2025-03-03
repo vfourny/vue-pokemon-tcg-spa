@@ -5,6 +5,6 @@ export type UserPayload =
     }
 
 export type IUser = {
-    id: string;
+    id: number;
     email: string;
 }

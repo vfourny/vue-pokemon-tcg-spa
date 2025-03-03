@@ -74,4 +74,4 @@ viendra s'ajouter à mon deck. Une fois satisfait, je donne un nom à mon deck e
 
 > Vous pouvez vous aider des composants NButton et NInput de NaiveUI pour réaliser cette partie.
 
-![img.png](img.png)
+![img.png](public/images/deck-builder.png)

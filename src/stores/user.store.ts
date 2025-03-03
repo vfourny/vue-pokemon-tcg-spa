@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia';
-import {postLogin, postUser} from "../api/user.api.ts";
+import {getUserById, postLogin, postUser} from "../api/user.api.ts";
 import type {IUser, UserPayload} from "../types/user.type.ts";
 import {ref} from "vue";
 
@@ -14,11 +14,18 @@ export const useUserStore = defineStore('userStore', () => {
         const data = await postLogin(userPayload);
         currentUser.value = data.user;
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.user.id);
+    }
+
+    const fetchCurrentUser = async () => {
+        const data = await getUserById(Number(localStorage.getItem('userId')));
+        currentUser.value = {id: data.id, email: data.email};
     }
 
     return {
         currentUser,
         createUser,
-        login
+        login,
+        fetchCurrentUser
     }
 });

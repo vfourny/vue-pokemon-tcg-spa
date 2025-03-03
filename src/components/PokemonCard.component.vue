@@ -2,29 +2,37 @@
   <n-card class="pokemon-card" size="small">
     <template #header>
       <div class="card-header">
-        <span class="pokemon-name">{{ pokemonCard.name }}</span>
-        <span class="pokemon-hp">PV {{ pokemonCard.lifePoints }}</span>
+        <span class="pokemon-name">{{ pokemonCard?.name || 'Sans nom' }}</span>
+        <span class="pokemon-hp">PV {{ pokemonCard?.lifePoints || 0 }}</span>
       </div>
     </template>
 
     <template #header-extra>
       <div class="type-container">
-        <n-tag :bordered="true" :color="{color: getPokemonTypeColor(pokemonCard.type.name), textColor: 'black'}" round>
+        <n-tag
+            v-if="pokemonCard?.type"
+            :bordered="true"
+            :color="{color: getPokemonTypeColor(pokemonCard.type.name), textColor: 'black'}"
+            round
+        >
           {{ pokemonCard.type.name }}
         </n-tag>
       </div>
     </template>
 
     <template #cover>
-      <img :src="pokemonCard.imageUrl" alt="pokemon-image" class="pokemon-image">
+      <img v-if="pokemonCard?.imageUrl" :src="pokemonCard.imageUrl" alt="pokemon-image" class="pokemon-image">
+      <div v-else class="no-image">Image non disponible</div>
     </template>
 
     <template #default>
       <div class="pokemon-info">
-        <p class="pokemon-size">Taille: {{ pokemonCard.height }}m | Poids: {{ pokemonCard.weight }}kg</p>
+        <p class="pokemon-size">
+          Taille: {{ pokemonCard?.height || '?' }}m | Poids: {{ pokemonCard?.weight || '?' }}kg
+        </p>
       </div>
 
-      <div class="pokemon-attacks">
+      <div v-if="pokemonCard?.attack" class="pokemon-attacks">
         <div class="attack">
           <span class="attack-name">{{ pokemonCard.attack.name }}</span>
           <span class="attack-damage">{{ pokemonCard.attack.damages }} PV</span>
@@ -38,9 +46,8 @@
 import type {IPokemonCard} from "../types/pokemon.types.ts";
 
 const props = defineProps<{ pokemonCard: IPokemonCard }>();
-const {pokemonCard} = props;
 
-const getPokemonTypeColor = (type: string) => {
+const getPokemonTypeColor = (type: string = '') => {
   const colors: Record<string, string> = {
     FIRE: '#FF9C54', WATER: '#4A90E2', GRASS: '#8BC34A', ELECTRIC: '#FFD54F',
     PSYCHIC: '#FF80AB', FIGHTING: '#FF5252', DARK: '#424242', STEEL: '#B0BEC5',

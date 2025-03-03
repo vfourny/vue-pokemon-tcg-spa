@@ -12,6 +12,8 @@ export default defineConfig({
                 'vue',
                 {
                     'naive-ui': [
+                        'NModal',
+                        'NDataTable',
                         'NMessageProvider',
                         'NTabs',
                         'NTabPane',

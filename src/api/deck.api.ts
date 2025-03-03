@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type {IDeck} from "../types/deck.type.ts";
+import type {IDeckPayload} from "../types/deck.type.ts";
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -14,7 +14,7 @@ export const getDecks = async () => {
     }
 }
 
-export const postDeck = async (deckPayload: IDeck) => {
+export const postDeck = async (deckPayload: IDeckPayload) => {
     const token = localStorage.getItem('token');
     try {
         const response = await api.post(`/decks`, deckPayload,
@@ -23,6 +23,20 @@ export const postDeck = async (deckPayload: IDeck) => {
                     Authorization: `Bearer ${token}`
                 }
             })
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const deleteDeck = async (deckId: number) => {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await api.delete(`/decks/${deckId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         return response.data
     } catch (error) {
         console.error(error);
