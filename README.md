@@ -75,3 +75,13 @@ viendra s'ajouter à mon deck. Une fois satisfait, je donne un nom à mon deck e
 > Vous pouvez vous aider des composants NButton et NInput de NaiveUI pour réaliser cette partie.
 
 ![img.png](public/images/deck-builder.png)
+
+## DeckCollection
+
+![img.png](public/images/deck-table.png)
+
+![img.png](public/images/delete-deck.png)
+
+### Modal du contenu du deck
+
+![img.png](public/images/modal-deck-content.png)
